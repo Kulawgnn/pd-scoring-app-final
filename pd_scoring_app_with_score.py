@@ -45,10 +45,9 @@ features = np.array([[
 # Scale features
 features_scaled = scaler.transform(features)
 
-# Convert to DataFrame and align with model input
+# Convert to DataFrame and align with expected input
 input_df = pd.DataFrame(features_scaled, columns=scaler.feature_names_in_)
 model_input = input_df.reindex(columns=scaler.feature_names_in_, fill_value=0)
-
 
 # Predict
 pred_prob = model.predict_proba(model_input)[0][1]
