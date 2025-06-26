@@ -40,6 +40,13 @@ features = np.array([[
     *sector_dict[sector],
     *eco_dict[eco_phase]
 ]])
+# Align with model feature columns
+input_df = pd.DataFrame(features_scaled, columns=scaler.feature_names_in_)
+model_input = input_df.reindex(columns=model.feature_names_in_, fill_value=0)
+
+# Predict
+pred_prob = model.predict_proba(model_input)[0][1]
+
 features_scaled = scaler.transform(features)
 pred_prob = model.predict_proba(features_scaled)[0][1]
 
